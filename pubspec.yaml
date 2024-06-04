@@ -9,7 +9,15 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  cupertino_icons: ^1.0.6
+
+  app_theme:
+    path: app_theme
+  core:
+    path: core
+  data:
+    path: data
+  navigation:
+    path: navigation
 
 dev_dependencies:
   flutter_test:
