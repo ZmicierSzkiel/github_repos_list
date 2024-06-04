@@ -3,10 +3,10 @@ import 'package:navigation/navigation.dart';
 
 import 'push_main_scope.dart';
 
-void initDI() {
+void initDI(Flavor flavor) {
   final AppScope mainScope = AppScope(
     type: AppScopeType.main,
-    onInit: pushMainScope,
+    onInit: () => pushMainScope(flavor),
     onPushed: () {
       getIt.get<AppRouter>().goToMainZone();
     },

@@ -2,11 +2,13 @@ part of di;
 
 const CoreDI coreDI = CoreDI();
 
-class CoreDI extends SingleZoneDI {
+class CoreDI extends MultiZoneDI {
   const CoreDI();
 
   @override
-  void setup() {
-    getIt.registerSingleton<AppConfig>(AppConfig());
+  void setup({required Flavor flavor}) {
+    getIt.registerSingleton<AppConfig>(
+      AppConfig.fromFlavor(flavor: flavor),
+    );
   }
 }

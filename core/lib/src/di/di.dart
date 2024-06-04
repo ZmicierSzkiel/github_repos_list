@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:get_it/get_it.dart';
 
 import '../config/app_config.dart';
+import '../config/flavors.dart';
 
 part 'core_di.dart';
 part 'core.dart';

@@ -4,6 +4,7 @@ export 'package:dio/dio.dart';
 export 'package:flutter_bloc/flutter_bloc.dart';
 
 export 'src/config/app_config.dart';
+export 'src/config/flavors.dart';
 
 export 'src/di/di.dart';
 
