@@ -25,6 +25,9 @@ abstract interface class AppColorsTheme extends ThemeExtension<AppColorsTheme> {
   // System
   Color get error;
 
+  // Shadow
+  Color get shadow;
+
   // Icon
   Color get primaryIcon;
 

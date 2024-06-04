@@ -12,6 +12,7 @@ class AppIcon {
   const AppIcon(this.iconKey);
 
   Widget call({
+    Color? color,
     double? height = _defaultIconSize,
     double? width = _defaultIconSize,
     BoxFit? fit,
@@ -24,10 +25,12 @@ class AppIcon {
     return SvgPicture.asset(
       iconKey,
       package: AppIcons.packageName,
-      colorFilter: ColorFilter.mode(
-        AppColors.nobleBlackIcon,
-        BlendMode.srcIn,
-      ),
+      colorFilter: color != null
+          ? ColorFilter.mode(
+              color,
+              BlendMode.srcIn,
+            )
+          : null,
       height: height ?? _defaultIconSize,
       width: width ?? _defaultIconSize,
       fit: fit ?? BoxFit.contain,

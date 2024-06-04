@@ -13,7 +13,7 @@ class AppLightColors extends AppColorsTheme {
 
   //Layers
   @override
-  Color get layer1 => AppColors.white26;
+  Color get layer1 => AppColors.white;
   @override
   Color get layer2 => AppColors.alpineGoat;
   @override
@@ -30,6 +30,10 @@ class AppLightColors extends AppColorsTheme {
   // System
   @override
   Color get error => AppColors.bloodDonor;
+
+  // Shadow
+  @override
+  Color get shadow => AppColors.sheetBlue;
 
   // Icon
   @override
