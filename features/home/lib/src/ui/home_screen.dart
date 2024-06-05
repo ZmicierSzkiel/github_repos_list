@@ -1,3 +1,4 @@
+import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 
 import 'package:core/core.dart';
@@ -14,6 +15,7 @@ class HomeScreen extends StatelessWidget {
     return BlocProvider(
       create: (BuildContext context) => HomeBloc(
         appRouter: getIt.get<AppRouter>(),
+        getReposByQueryUseCase: getIt.get<GetReposByQueryUseCase>(),
       ),
       child: const HomeContent(),
     );

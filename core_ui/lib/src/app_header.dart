@@ -24,7 +24,6 @@ class AppHeader extends StatelessWidget implements PreferredSizeWidget {
     return PreferredSize(
       preferredSize: Size.fromHeight(60.0),
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 16.0),
         decoration: BoxDecoration(
           color: Colors.white,
           boxShadow: [
@@ -44,6 +43,7 @@ class AppHeader extends StatelessWidget implements PreferredSizeWidget {
         ),
         child: AppBar(
           title: Text(title),
+          scrolledUnderElevation: 0.0,
           leading: isAnotherScreen
               ? Container(
                   width: 44.0,

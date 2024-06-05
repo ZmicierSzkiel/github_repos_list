@@ -7,7 +7,7 @@ class AppLoadingIndicator extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: CupertinoActivityIndicator(
-        radius: 22.0,
+        radius: 11.0,
       ),
     );
   }

@@ -2,7 +2,7 @@ import 'flavors.dart';
 
 class AppConfig {
   static const String _baseUrl = 'https://api.github.com';
-  static const String _reposEndpoint = '/repositories';
+  static const String _reposEndpoint = '/search/repositories';
 
   final String baseUrl;
   final String reposEndpoint;

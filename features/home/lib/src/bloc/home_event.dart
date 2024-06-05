@@ -4,6 +4,12 @@ sealed class HomeEvent {
   const HomeEvent();
 }
 
+final class GetReposByQuery extends HomeEvent{
+  final String query;
+
+  const GetReposByQuery(this.query);
+}
+
 final class ToggleSearchHintText extends HomeEvent {
   final bool isSearching;
 

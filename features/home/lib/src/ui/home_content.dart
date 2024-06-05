@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:core/core.dart';
 import 'package:core_ui/core_ui.dart';
+import 'package:domain/domain.dart';
 
 import '../bloc/home_bloc.dart';
 
@@ -43,6 +44,7 @@ class _HomeContentState extends State<HomeContent> {
         final bool isSearching = state.isSearching;
         final bool isFocused = state.isFocused;
         final LoadingStatus loadingStatus = state.loadingStatus;
+        final List<Repo> repos = state.repos;
 
         return GestureDetector(
           onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
@@ -52,43 +54,72 @@ class _HomeContentState extends State<HomeContent> {
               onPush: () => pushRouteAction(context),
               isAnotherScreen: false,
             ),
-            body: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: <Widget>[
-                  const SizedBox(
-                    height: 25.0,
-                  ),
-                  AppSearchTextField(
-                    focusNode: _searchFocusNode,
-                    controller: _searchEditingController,
-                    hintText: 'Search',
-                    isFocused: isFocused,
-                    onClearTextField: _clearAppSearchTextField,
-                  ),
-                  const SizedBox(
-                    height: 16.0,
-                  ),
-                  AppSearchHintText(isSearching: isSearching),
-                  Padding(
-                    padding: EdgeInsets.only(top: screenHeight),
-                    child: Stack(
-                      children: <Widget>[
-                        if (loadingStatus == LoadingStatus.loading)
-                          AppLoadingIndicator()
-                        else if (loadingStatus == LoadingStatus.preparing)
-                          const SizedBox.shrink()
-                        else
-                          AppPlaceholder(
-                            titleText: 'You have empty history.',
-                            bottomText: 'Click on search to start journey!',
-                          ),
+            body: CustomScrollView(
+              physics: loadingStatus == LoadingStatus.idle || repos.isEmpty
+                  ? const NeverScrollableScrollPhysics()
+                  : null,
+              slivers: <Widget>[
+                SliverPadding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  sliver: SliverList(
+                    delegate: SliverChildListDelegate(
+                      <Widget>[
+                        const SizedBox(
+                          height: 25.0,
+                        ),
+                        AppSearchTextField(
+                          focusNode: _searchFocusNode,
+                          controller: _searchEditingController,
+                          hintText: 'Search',
+                          isFocused: isFocused,
+                          onClearTextField: _clearAppSearchTextField,
+                        ),
+                        const SizedBox(
+                          height: 16.0,
+                        ),
+                        AppSearchHintText(isSearching: isSearching),
+                        const SizedBox(
+                          height: 7.0,
+                        ),
                       ],
                     ),
                   ),
-                ],
-              ),
+                ),
+                if (loadingStatus == LoadingStatus.idle && repos.isEmpty)
+                  SliverToBoxAdapter(
+                    child: AppPlaceholder(
+                      titleText: 'You have empty history.',
+                      bottomText: 'Click on search to start journey!',
+                      padding: screenHeight,
+                    ),
+                  ),
+                if (loadingStatus == LoadingStatus.success && repos.isEmpty)
+                  SliverToBoxAdapter(
+                    child: AppPlaceholder(
+                      titleText: 'Nothing was found on your search.',
+                      bottomText: 'Please check the spelling',
+                      padding: screenHeight,
+                    ),
+                  ),
+                if (loadingStatus == LoadingStatus.loading)
+                  SliverToBoxAdapter(
+                    child: AppLoadingIndicator(),
+                  ),
+                if (loadingStatus == LoadingStatus.success)
+                  SliverList(
+                    delegate: SliverChildBuilderDelegate(
+                      childCount: repos.length,
+                      (_, int index) {
+                        final Repo repo = repos[index];
+
+                        return AppListTile(
+                          repoName: repo.name,
+                          onPressed: () {},
+                        );
+                      },
+                    ),
+                  ),
+              ],
             ),
           ),
         );

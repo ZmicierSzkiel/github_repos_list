@@ -1,5 +1,11 @@
 part of 'home_bloc.dart';
 
+extension GetReposByQueryHelper on HomeBloc {
+  void getReposByQueryAction(String query) {
+    add(GetReposByQuery(query));
+  }
+}
+
 extension ToggleWidgetStyleHelper on HomeBloc {
   void toggleSearchHintTextAction(bool isSearching) {
     add(ToggleSearchHintText(isSearching));

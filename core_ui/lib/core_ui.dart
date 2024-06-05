@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 part 'src/app_header.dart';
+part 'src/app_list_tile.dart';
 part 'src/app_loading_indicator.dart';
 part 'src/app_placeholder.dart';
 part 'src/app_search_hint_text.dart';
