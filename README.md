@@ -5,11 +5,15 @@ To use the application, you have to setup GitHub API Token via [flutter_dotenv](
 
 # Screenshots of the application
 
-![Splash](readme_images/splash.gif)
-![Home screen](readme_images/home_screen.png)
-![Result](readme_images/result.png)
-![Set repository as favourite](readme_images/favorites_set.png)
-![Search history](readme_images/search_history.png)
-![Favourites screen](readme_images/delete_favorite.png)
-![Delete favourite](readme_images/home_screen.png)
-![Delete search history](readme_images/delete_search_history.png)
+<p align="center">
+  <img src="readme_images/splash.gif" alt="Splash" width="200"/>
+  <img src="readme_images/home_screen.png" alt="Home screen" width="200"/>
+  <img src="readme_images/result.png" alt="Result" width="200"/>
+  <img src="readme_images/favorites_set.png" alt="Set repository as favourite" width="200"/>
+</p>
+<p align="center">
+  <img src="readme_images/search_history.png" alt="Search history" width="200"/>
+  <img src="readme_images/delete_favorite.png" alt="Favourites screen" width="200"/>
+  <img src="readme_images/home_screen.png" alt="Delete favourite" width="200"/>
+  <img src="readme_images/delete_search_history.png" alt="Delete search history" width="200"/>
+</p>
