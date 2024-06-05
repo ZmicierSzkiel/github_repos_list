@@ -27,11 +27,7 @@ class HomeDI extends SingleZoneDI {
         repository: getIt.get<HomeRepository>(),
       ),
     );
-    getIt.registerFactory<DeleteRepoFromFavoriteUseCase>(
-      () => DeleteRepoFromFavoriteUseCase(
-        repository: getIt.get<HomeRepository>(),
-      ),
-    );
+    
     getIt.registerFactory<GetFavoriteReposUseCase>(
       () => GetFavoriteReposUseCase(
         repository: getIt.get<HomeRepository>(),

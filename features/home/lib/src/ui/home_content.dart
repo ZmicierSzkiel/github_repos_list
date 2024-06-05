@@ -149,6 +149,7 @@ class _HomeContentState extends State<HomeContent> {
                         final String previousQuery = previousQueries[index];
                         return AppDismissible(
                           title: previousQuery,
+                          dismissableKey: previousQuery,
                           isRepo: false,
                           onDismissed: (_) {
                             deleteQueryFromPreviousQueriesAction(

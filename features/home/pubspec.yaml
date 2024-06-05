@@ -9,8 +9,6 @@ dependencies:
   flutter:
     sdk: flutter
 
-  app_theme:
-    path: ../../app_theme
   core:
     path: ../../core
   core_ui:

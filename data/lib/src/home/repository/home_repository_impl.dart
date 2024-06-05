@@ -16,12 +16,6 @@ class HomeRepositoryImpl implements HomeRepository {
   }
 
   @override
-  Future<void> deleteRepoFromFavorite() {
-    // TODO: implement deleteRepoFromFavorite
-    throw UnimplementedError();
-  }
-
-  @override
   List<Repo> getFavoriteRepos() {
     final List<Repo> favoriteRepos = _hiveProvider.getFavoriteRepos();
 

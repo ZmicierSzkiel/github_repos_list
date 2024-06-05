@@ -1,6 +1,7 @@
 import 'package:core/core.dart';
 
 import '../dio/dio.dart';
+import '../favorites/favorites.dart';
 import '../hive/hive.dart';
 import '../home/home.dart';
 
@@ -14,5 +15,6 @@ class DataDI extends SingleZoneDI {
     dioDI.setup();
     hiveDI.setup();
     homeDI.setup();
+    favoritesDI.setup();
   }
 }

@@ -65,4 +65,10 @@ class HiveProvider {
 
     return favoriteReposBox.values.toList();
   }
+
+  Future<void> deleteRepoFromFavorites(Repo repo) async {
+    final Box<Repo> favoriteReposBox = Hive.box<Repo>(HiveKeys.favoriteRepos);
+    
+    await favoriteReposBox.delete(repo.id);
+  }
 }

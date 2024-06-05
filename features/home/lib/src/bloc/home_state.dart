@@ -6,7 +6,6 @@ class HomeState {
   final List<Repo> favoriteRepos;
   final bool isSearching;
   final bool isFocused;
-  final bool isFavorite;
   final LoadingStatus loadingStatus;
 
   const HomeState({
@@ -15,7 +14,6 @@ class HomeState {
     this.favoriteRepos = const <Repo>[],
     this.isSearching = false,
     this.isFocused = false,
-    this.isFavorite = false,
     this.loadingStatus = LoadingStatus.idle,
   });
 
@@ -25,7 +23,6 @@ class HomeState {
     List<Repo>? favoriteRepos,
     bool? isSearching,
     bool? isFocused,
-    bool? isFavorite,
     LoadingStatus? loadingStatus,
   }) {
     return HomeState(
@@ -34,7 +31,6 @@ class HomeState {
       favoriteRepos: favoriteRepos ?? this.favoriteRepos,
       isSearching: isSearching ?? this.isSearching,
       isFocused: isFocused ?? this.isFocused,
-      isFavorite: isFavorite ?? this.isFavorite,
       loadingStatus: loadingStatus ?? this.loadingStatus,
     );
   }

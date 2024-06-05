@@ -42,28 +42,44 @@ class AppHeader extends StatelessWidget implements PreferredSizeWidget {
           ],
         ),
         child: AppBar(
-          title: Text(title),
+          centerTitle: true,
           scrolledUnderElevation: 0.0,
-          leading: isAnotherScreen
-              ? Padding(
-                padding: const EdgeInsets.only(left: 16.0),
-                child: AppHeaderButton(
-                    icon: AppIcons.arrowIcon.call(),
-                    onPressed: onPop,
+          automaticallyImplyLeading: false,
+          title: Stack(
+            children: <Widget>[
+              AppBar(
+                automaticallyImplyLeading: false,
+                elevation: 0,
+                scrolledUnderElevation: 0.0,
+                leading: isAnotherScreen
+                    ? Align(
+                      alignment: Alignment.centerLeft,
+                      child: AppHeaderButton(
+                        icon: AppIcons.arrowIcon.call(),
+                        onPressed: onPop,
+                      ),
+                    )
+                    : const SizedBox.shrink(),
+                actions: <Widget>[
+                  isAnotherScreen
+                      ? const SizedBox.shrink()
+                      : AppHeaderButton(
+                          icon: AppIcons.favoriteUnselectedIcon.call(),
+                          onPressed: onPush,
+                        ),
+                ],
+              ),
+              Positioned.fill(
+                child: Center(
+                  child: Text(
+                    title,
+                    textAlign: TextAlign.center,
+                    overflow: TextOverflow.ellipsis,
                   ),
-              )
-              : const SizedBox.shrink(),
-          actions: <Widget>[
-            isAnotherScreen
-                ? const SizedBox.shrink()
-                : Padding(
-                    padding: const EdgeInsets.only(right: 16.0),
-                    child: AppHeaderButton(
-                      icon: AppIcons.favoriteUnselectedIcon.call(),
-                      onPressed: onPush,
-                    ),
-                  ),
-          ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

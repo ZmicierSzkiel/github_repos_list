@@ -73,6 +73,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     emit(
       state.copyWith(
         repos: updatedRepos,
+        favoriteRepos: favoriteRepos,
         loadingStatus: LoadingStatus.success,
       ),
     );
@@ -114,8 +115,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     SetFavoriteRepo event,
     Emitter<HomeState> emit,
   ) async {
-    List<Repo> favoriteRepos = <Repo>[];
-
     final Repo repo = event.repo;
     final Repo favoriteRepo = Repo(
       id: repo.id,
@@ -124,7 +123,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     );
 
     await _setFavoriteRepoUseCase.execute(favoriteRepo);
-    favoriteRepos.add(favoriteRepo);
+    final List<Repo> favoriteRepos = _getFavoriteReposUseCase.execute();
 
     emit(
       state.copyWith(favoriteRepos: favoriteRepos),
