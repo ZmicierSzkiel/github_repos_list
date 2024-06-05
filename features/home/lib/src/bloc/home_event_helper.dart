@@ -6,6 +6,12 @@ extension GetReposByQueryHelper on HomeBloc {
   }
 }
 
+extension SetFavoriteRepoHelper on HomeBloc {
+  void setFavoriteRepoAction(Repo repo) {
+    add(SetFavoriteRepo(repo));
+  }
+}
+
 extension ClearTextFieldHelper on HomeBloc {
   void clearTextFieldAction() {
     add(ClearTextField());

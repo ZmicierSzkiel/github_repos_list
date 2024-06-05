@@ -4,7 +4,7 @@ sealed class HomeEvent {
   const HomeEvent();
 }
 
-final class GetReposByQuery extends HomeEvent{
+final class GetReposByQuery extends HomeEvent {
   final String query;
 
   const GetReposByQuery(this.query);
@@ -12,6 +12,16 @@ final class GetReposByQuery extends HomeEvent{
 
 final class GetPreviousQueries extends HomeEvent {
   const GetPreviousQueries();
+}
+
+final class GetFavoriteRepos extends HomeEvent {
+  const GetFavoriteRepos();
+}
+
+final class SetFavoriteRepo extends HomeEvent {
+  final Repo repo;
+
+  const SetFavoriteRepo(this.repo);
 }
 
 final class ClearTextField extends HomeEvent {

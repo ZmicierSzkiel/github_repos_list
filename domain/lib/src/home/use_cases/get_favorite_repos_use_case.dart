@@ -1,6 +1,6 @@
 part of home;
 
-class GetFavoriteReposUseCase extends FutureUseCase<List<Repo>, NoParams> {
+class GetFavoriteReposUseCase extends UseCase<List<Repo>, NoParams> {
   final HomeRepository _repository;
 
   const GetFavoriteReposUseCase({
@@ -8,7 +8,7 @@ class GetFavoriteReposUseCase extends FutureUseCase<List<Repo>, NoParams> {
   }) : _repository = repository;
 
   @override
-  Future<List<Repo>> execute ([NoParams? params])async {
-    return await _repository.getFavoriteRepos();
+  List<Repo> execute([NoParams? params]) {
+    return _repository.getFavoriteRepos();
   }
 }

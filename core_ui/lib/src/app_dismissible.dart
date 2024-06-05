@@ -2,11 +2,13 @@ part of core_ui;
 
 class AppDismissible extends StatelessWidget {
   final String title;
+  final bool isRepo;
   final void Function(DismissDirection?) onDismissed;
 
   const AppDismissible({
     super.key,
     required this.title,
+    required this.isRepo,
     required this.onDismissed,
   });
 
@@ -33,6 +35,7 @@ class AppDismissible extends StatelessWidget {
       onDismissed: onDismissed,
       child: AppListTile(
         title: title,
+        isRepo: isRepo,
       ),
     );
   }

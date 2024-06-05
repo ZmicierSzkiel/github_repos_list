@@ -19,22 +19,19 @@ class RepoAdapter extends TypeAdapter<Repo> {
     return Repo(
       id: fields[0] as int,
       name: fields[1] as String,
-      url: fields[2] as String,
-      isFavorite: fields[3] as bool,
+      isFavorite: fields[2] as bool,
     );
   }
 
   @override
   void write(BinaryWriter writer, Repo obj) {
     writer
-      ..writeByte(4)
+      ..writeByte(3)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
       ..write(obj.name)
       ..writeByte(2)
-      ..write(obj.url)
-      ..writeByte(3)
       ..write(obj.isFavorite);
   }
 

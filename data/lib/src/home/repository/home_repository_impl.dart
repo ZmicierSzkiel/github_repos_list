@@ -22,9 +22,10 @@ class HomeRepositoryImpl implements HomeRepository {
   }
 
   @override
-  Future<List<Repo>> getFavoriteRepos() {
-    // TODO: implement getFavoriteRepos
-    throw UnimplementedError();
+  List<Repo> getFavoriteRepos() {
+    final List<Repo> favoriteRepos = _hiveProvider.getFavoriteRepos();
+
+    return favoriteRepos;
   }
 
   @override
@@ -42,9 +43,8 @@ class HomeRepositoryImpl implements HomeRepository {
   }
 
   @override
-  Future<void> setFavoriteRepo(Repo repo) {
-    // TODO: implement setFavoriteRepo
-    throw UnimplementedError();
+  Future<void> setFavoriteRepo(Repo repo) async {
+    await _hiveProvider.setFavoriteRepo(repo);
   }
 
   @override

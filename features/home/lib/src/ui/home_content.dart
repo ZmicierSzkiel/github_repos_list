@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
-import 'package:app_theme/app_theme.dart';
 import 'package:core/core.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:domain/domain.dart';
@@ -53,6 +52,7 @@ class _HomeContentState extends State<HomeContent> {
         final bool isFocused = state.isFocused;
         final LoadingStatus loadingStatus = state.loadingStatus;
         final List<Repo> repos = state.repos;
+        final List<Repo> favoriteRepos = state.favoriteRepos;
         final List<String> previousQueries = state.previousQueries;
 
         return GestureDetector(
@@ -127,11 +127,14 @@ class _HomeContentState extends State<HomeContent> {
                       childCount: repos.length,
                       (_, int index) {
                         final Repo repo = repos[index];
-
+                        final bool isFavorite = favoriteRepos.any(
+                          (Repo favoriteRepo) => favoriteRepo.id == repo.id,
+                        );
                         return AppListTile(
                           title: repo.name,
-                          icon: AppIcons.favoriteButtonIcon.call(),
-                          onPressed: () {},
+                          isRepo: true,
+                          isFavorite: isFavorite,
+                          onPressed: () => setFavoriteRepoAction(context, repo),
                         );
                       },
                     ),
@@ -146,6 +149,7 @@ class _HomeContentState extends State<HomeContent> {
                         final String previousQuery = previousQueries[index];
                         return AppDismissible(
                           title: previousQuery,
+                          isRepo: false,
                           onDismissed: (_) {
                             deleteQueryFromPreviousQueriesAction(
                               context,
@@ -193,6 +197,10 @@ class _HomeContentState extends State<HomeContent> {
     context.read<HomeBloc>().toggleAppSearchTextFieldColorAction(
           _searchFocusNode.hasFocus,
         );
+  }
+
+  void setFavoriteRepoAction(BuildContext context, Repo repo) {
+    context.read<HomeBloc>().setFavoriteRepoAction(repo);
   }
 
   void pushRouteAction(BuildContext context) {

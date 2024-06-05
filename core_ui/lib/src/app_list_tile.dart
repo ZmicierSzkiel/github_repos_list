@@ -2,13 +2,15 @@ part of core_ui;
 
 class AppListTile extends StatelessWidget {
   final String title;
-  final Widget? icon;
+  final bool isRepo;
+  final bool isFavorite;
   final VoidCallback? onPressed;
 
   const AppListTile({
     super.key,
     required this.title,
-    this.icon,
+    required this.isRepo,
+    this.isFavorite = false,
     this.onPressed,
   });
 
@@ -44,10 +46,14 @@ class AppListTile extends StatelessWidget {
           padding: const EdgeInsets.only(
             right: 16.0,
           ),
-          child: IconButton(
-            icon: icon ?? const SizedBox.shrink(),
-            onPressed: onPressed,
-          ),
+          child: isRepo
+              ? IconButton(
+                  icon: isFavorite
+                      ? AppIcons.favoriteSelectedIcon.call()
+                      : AppIcons.favoriteButtonIcon.call(),
+                  onPressed: onPressed,
+                )
+              : const SizedBox.shrink(),
         ),
       ),
     );

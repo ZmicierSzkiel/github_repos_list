@@ -5,7 +5,7 @@ abstract interface class HomeRepository {
 
   Future<void> deleteQueryFromHistory(String query);
   Future<void> deleteRepoFromFavorite();
-  Future<List<Repo>> getFavoriteRepos();
+  List<Repo> getFavoriteRepos();
   Future<List<Repo>> getReposByQuery(String query);
   List<String> getPreviousQueries(); 
   Future<void> setFavoriteRepo(Repo repo);

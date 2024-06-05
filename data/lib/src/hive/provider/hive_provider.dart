@@ -8,7 +8,7 @@ class HiveProvider {
 
     Hive.registerAdapter(RepoAdapter());
 
-    await Hive.openBox(HiveKeys.favoriteRepos);
+    await Hive.openBox<Repo>(HiveKeys.favoriteRepos);
     await Hive.openBox<List<String>>(HiveKeys.previousQueries);
   }
 
@@ -52,5 +52,17 @@ class HiveProvider {
 
     previousQueries.remove(query);
     await searchHistoryBox.put(HiveKeys.previousQueries, previousQueries);
+  }
+
+  Future<void> setFavoriteRepo(Repo repo) async {
+    final Box<Repo> favoriteReposBox = Hive.box<Repo>(HiveKeys.favoriteRepos);
+
+    await favoriteReposBox.put(repo.id, repo);
+  }
+
+  List<Repo> getFavoriteRepos() {
+    final Box<Repo> favoriteReposBox = Hive.box<Repo>(HiveKeys.favoriteRepos);
+
+    return favoriteReposBox.values.toList();
   }
 }

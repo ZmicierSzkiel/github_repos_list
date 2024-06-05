@@ -17,8 +17,10 @@ class HomeScreen extends StatelessWidget {
         appRouter: getIt.get<AppRouter>(),
         deleteQueryFromPreviousQueriesUseCase:
             getIt.get<DeleteQueryFromPreviousQueriesUseCase>(),
+        getFavoriteReposUseCase: getIt.get<GetFavoriteReposUseCase>(),
         getReposByQueryUseCase: getIt.get<GetReposByQueryUseCase>(),
         getPreviousQueriesUseCase: getIt.get<GetPreviousQueriesUseCase>(),
+        setFavoriteRepoUseCase: getIt.get<SetFavoriteRepoUseCase>(),
         setQueryToPreviousQueriesUseCase:
             getIt.get<SetQueryToPreviousQueriesUseCase>(),
       ),

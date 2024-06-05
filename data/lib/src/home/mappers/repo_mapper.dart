@@ -4,12 +4,10 @@ class RepoMapper extends Repo {
   RepoMapper({
     required int id,
     required String name,
-    required String url,
     required bool isFavorite,
   }) : super(
           id: id,
           name: name,
-          url: url,
           isFavorite: false,
         );
 
@@ -17,7 +15,6 @@ class RepoMapper extends Repo {
     return RepoMapper(
       id: json['id'] as int? ?? 0,
       name: json['name'] as String? ?? '',
-      url: json['url'] as String? ?? '',
       isFavorite: false,
     );
   }

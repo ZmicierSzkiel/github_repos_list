@@ -1,7 +1,7 @@
 part of home;
 
 @HiveType(typeId: 0)
-class Repo extends HiveObject{
+class Repo extends HiveObject {
   @HiveField(0)
   final int id;
 
@@ -9,15 +9,24 @@ class Repo extends HiveObject{
   final String name;
 
   @HiveField(2)
-  final String url;
-
-  @HiveField(3)
   final bool isFavorite;
 
   Repo({
     required this.id,
     required this.name,
-    required this.url,
     required this.isFavorite,
   });
+
+  Repo copyWith({
+    int? id,
+    String? name,
+    String? url,
+    bool? isFavorite,
+  }) {
+    return Repo(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      isFavorite: isFavorite ?? this.isFavorite,
+    );
+  }
 }
