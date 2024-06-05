@@ -156,6 +156,11 @@ class _HomeContentState extends State<HomeContent> {
                       },
                     ),
                   ),
+                SliverToBoxAdapter(
+                  child: const SizedBox(
+                    height: 25.0,
+                  ),
+                ),
               ],
             ),
           ),

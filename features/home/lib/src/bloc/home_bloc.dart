@@ -107,6 +107,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
     await _deleteQueryFromPreviousQueriesUseCase.execute(query);
     final List<String> updatedQueries = _getPreviousQueriesUseCase.execute();
+
     emit(
       state.copyWith(previousQueries: updatedQueries),
     );
