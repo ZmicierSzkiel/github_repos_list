@@ -1,5 +1,8 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
+import 'package:app_theme/app_theme.dart';
 import 'package:core/core.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:domain/domain.dart';
@@ -18,11 +21,14 @@ class _HomeContentState extends State<HomeContent> {
   final TextEditingController _searchEditingController =
       TextEditingController();
 
+  Timer? _debounce;
+
   @override
   void initState() {
     super.initState();
     _searchFocusNode.addListener(toggleAppSearchTextFieldColorAction);
     _searchEditingController.addListener(toggleSearchHintTextAction);
+    _searchEditingController.addListener(getReposByQueryAction);
   }
 
   @override
@@ -30,9 +36,11 @@ class _HomeContentState extends State<HomeContent> {
     super.dispose();
     _searchFocusNode.removeListener(toggleAppSearchTextFieldColorAction);
     _searchEditingController.removeListener(toggleSearchHintTextAction);
+    _searchEditingController.removeListener(getReposByQueryAction);
 
     _searchEditingController.dispose();
     _searchFocusNode.dispose();
+    _debounce?.cancel();
   }
 
   @override
@@ -45,6 +53,7 @@ class _HomeContentState extends State<HomeContent> {
         final bool isFocused = state.isFocused;
         final LoadingStatus loadingStatus = state.loadingStatus;
         final List<Repo> repos = state.repos;
+        final List<String> previousQueries = state.previousQueries;
 
         return GestureDetector(
           onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
@@ -55,9 +64,6 @@ class _HomeContentState extends State<HomeContent> {
               isAnotherScreen: false,
             ),
             body: CustomScrollView(
-              physics: loadingStatus == LoadingStatus.idle || repos.isEmpty
-                  ? const NeverScrollableScrollPhysics()
-                  : null,
               slivers: <Widget>[
                 SliverPadding(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -72,12 +78,18 @@ class _HomeContentState extends State<HomeContent> {
                           controller: _searchEditingController,
                           hintText: 'Search',
                           isFocused: isFocused,
-                          onClearTextField: _clearAppSearchTextField,
+                          onClearTextField: () => clearTextFieldAction(context),
                         ),
-                        const SizedBox(
-                          height: 16.0,
-                        ),
-                        AppSearchHintText(isSearching: isSearching),
+                        if (!_searchFocusNode.hasFocus || isSearching)
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              const SizedBox(
+                                height: 16.0,
+                              ),
+                              AppSearchHintText(isSearching: isSearching),
+                            ],
+                          ),
                         const SizedBox(
                           height: 7.0,
                         ),
@@ -85,7 +97,10 @@ class _HomeContentState extends State<HomeContent> {
                     ),
                   ),
                 ),
-                if (loadingStatus == LoadingStatus.idle && repos.isEmpty)
+                if (loadingStatus == LoadingStatus.idle &&
+                    repos.isEmpty &&
+                    previousQueries.isEmpty &&
+                    !_searchFocusNode.hasFocus)
                   SliverToBoxAdapter(
                     child: AppPlaceholder(
                       titleText: 'You have empty history.',
@@ -105,7 +120,8 @@ class _HomeContentState extends State<HomeContent> {
                   SliverToBoxAdapter(
                     child: AppLoadingIndicator(),
                   ),
-                if (loadingStatus == LoadingStatus.success)
+                if (loadingStatus == LoadingStatus.success &&
+                    _searchEditingController.text.isNotEmpty)
                   SliverList(
                     delegate: SliverChildBuilderDelegate(
                       childCount: repos.length,
@@ -113,8 +129,29 @@ class _HomeContentState extends State<HomeContent> {
                         final Repo repo = repos[index];
 
                         return AppListTile(
-                          repoName: repo.name,
+                          title: repo.name,
+                          icon: AppIcons.favoriteButtonIcon.call(),
                           onPressed: () {},
+                        );
+                      },
+                    ),
+                  ),
+                if (previousQueries.isNotEmpty &&
+                    _searchEditingController.text.isEmpty &&
+                    !_searchFocusNode.hasFocus)
+                  SliverList(
+                    delegate: SliverChildBuilderDelegate(
+                      childCount: previousQueries.length,
+                      (_, int index) {
+                        final String previousQuery = previousQueries[index];
+                        return AppDismissible(
+                          title: previousQuery,
+                          onDismissed: (_) {
+                            deleteQueryFromPreviousQueriesAction(
+                              context,
+                              previousQuery,
+                            );
+                          },
                         );
                       },
                     ),
@@ -123,6 +160,20 @@ class _HomeContentState extends State<HomeContent> {
             ),
           ),
         );
+      },
+    );
+  }
+
+  void getReposByQueryAction() {
+    if (_debounce?.isActive ?? false) _debounce?.cancel();
+
+    _debounce = Timer(
+      const Duration(milliseconds: 500),
+      () {
+        final String query = _searchEditingController.text;
+        if (query.isNotEmpty) {
+          context.read<HomeBloc>().getReposByQueryAction(query);
+        }
       },
     );
   }
@@ -143,7 +194,15 @@ class _HomeContentState extends State<HomeContent> {
     context.read<HomeBloc>().pushRouteAction();
   }
 
-  void _clearAppSearchTextField() {
+  void clearTextFieldAction(BuildContext context) {
     _searchEditingController.clear();
+    context.read<HomeBloc>().clearTextFieldAction();
+  }
+
+  void deleteQueryFromPreviousQueriesAction(
+    BuildContext context,
+    String query,
+  ) {
+    context.read<HomeBloc>().deleteQueryFromPreviousQueriesAction(query);
   }
 }

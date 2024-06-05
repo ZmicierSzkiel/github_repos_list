@@ -22,8 +22,8 @@ class HomeDI extends SingleZoneDI {
       dependsOn: <Type>[HiveProvider],
     );
 
-    getIt.registerFactory<DeleteQueryFromHistoryUseCase>(
-      () => DeleteQueryFromHistoryUseCase(
+    getIt.registerFactory<DeleteQueryFromPreviousQueriesUseCase>(
+      () => DeleteQueryFromPreviousQueriesUseCase(
         repository: getIt.get<HomeRepository>(),
       ),
     );
@@ -42,8 +42,8 @@ class HomeDI extends SingleZoneDI {
         repository: getIt.get<HomeRepository>(),
       ),
     );
-    getIt.registerFactory<GetSearchHistoryUseCase>(
-      () => GetSearchHistoryUseCase(
+    getIt.registerFactory<GetPreviousQueriesUseCase>(
+      () => GetPreviousQueriesUseCase(
         repository: getIt.get<HomeRepository>(),
       ),
     );
@@ -52,8 +52,8 @@ class HomeDI extends SingleZoneDI {
         repository: getIt.get<HomeRepository>(),
       ),
     );
-    getIt.registerFactory<SetQueryToSearchHistoryUseCase>(
-      () => SetQueryToSearchHistoryUseCase(
+    getIt.registerFactory<SetQueryToPreviousQueriesUseCase>(
+      () => SetQueryToPreviousQueriesUseCase(
         repository: getIt.get<HomeRepository>(),
       ),
     );

@@ -3,11 +3,11 @@ part of home;
 abstract interface class HomeRepository {
   const HomeRepository();
 
-  Future<void> deleteQueryFromHistory();
+  Future<void> deleteQueryFromHistory(String query);
   Future<void> deleteRepoFromFavorite();
   Future<List<Repo>> getFavoriteRepos();
   Future<List<Repo>> getReposByQuery(String query);
-  Future<List<String>> getSearchHistory(); 
+  List<String> getPreviousQueries(); 
   Future<void> setFavoriteRepo(Repo repo);
-  Future<void> setQueryToSearchHistory(String query);
+  Future<void> setQueryToPreviousQueries(String query);
 }

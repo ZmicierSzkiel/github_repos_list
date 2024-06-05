@@ -6,6 +6,18 @@ extension GetReposByQueryHelper on HomeBloc {
   }
 }
 
+extension ClearTextFieldHelper on HomeBloc {
+  void clearTextFieldAction() {
+    add(ClearTextField());
+  }
+}
+
+extension DeleteAppListTileHelper on HomeBloc {
+  void deleteQueryFromPreviousQueriesAction(String query) {
+    add(DeleteQueryFromPreviousQueries(query));
+  }
+}
+
 extension ToggleWidgetStyleHelper on HomeBloc {
   void toggleSearchHintTextAction(bool isSearching) {
     add(ToggleSearchHintText(isSearching));

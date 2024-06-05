@@ -11,9 +11,8 @@ class HomeRepositoryImpl implements HomeRepository {
         _homeProvider = homeProvider;
 
   @override
-  Future<void> deleteQueryFromHistory() {
-    // TODO: implement deleteQueryFromHistory
-    throw UnimplementedError();
+  Future<void> deleteQueryFromHistory(String query) async {
+    await _hiveProvider.deleteQueryFromPreviousQueries(query);
   }
 
   @override
@@ -36,9 +35,10 @@ class HomeRepositoryImpl implements HomeRepository {
   }
 
   @override
-  Future<List<String>> getSearchHistory() {
-    // TODO: implement getSearchHistory
-    throw UnimplementedError();
+  List<String> getPreviousQueries() {
+    final List<String> previousQueries = _hiveProvider.getPreviousQueries();
+
+    return previousQueries;
   }
 
   @override
@@ -48,8 +48,7 @@ class HomeRepositoryImpl implements HomeRepository {
   }
 
   @override
-  Future<void> setQueryToSearchHistory(String query) {
-    // TODO: implement setQueryToSearchHistory
-    throw UnimplementedError();
+  Future<void> setQueryToPreviousQueries(String query) async {
+    await _hiveProvider.setQueryToPreviousQueries(query);
   }
 }

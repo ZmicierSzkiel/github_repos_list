@@ -10,6 +10,20 @@ final class GetReposByQuery extends HomeEvent{
   const GetReposByQuery(this.query);
 }
 
+final class GetPreviousQueries extends HomeEvent {
+  const GetPreviousQueries();
+}
+
+final class ClearTextField extends HomeEvent {
+  const ClearTextField();
+}
+
+final class DeleteQueryFromPreviousQueries extends HomeEvent {
+  final String query;
+
+  const DeleteQueryFromPreviousQueries(this.query);
+}
+
 final class ToggleSearchHintText extends HomeEvent {
   final bool isSearching;
 

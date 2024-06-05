@@ -1,7 +1,7 @@
 part of home;
 
 @HiveType(typeId: 0)
-class Repo{
+class Repo extends HiveObject{
   @HiveField(0)
   final int id;
 
@@ -14,7 +14,7 @@ class Repo{
   @HiveField(3)
   final bool isFavorite;
 
-  const Repo({
+  Repo({
     required this.id,
     required this.name,
     required this.url,

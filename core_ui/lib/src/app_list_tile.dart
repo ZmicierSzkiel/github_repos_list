@@ -1,13 +1,15 @@
 part of core_ui;
 
 class AppListTile extends StatelessWidget {
-  final String repoName;
-  final VoidCallback onPressed;
+  final String title;
+  final Widget? icon;
+  final VoidCallback? onPressed;
 
   const AppListTile({
     super.key,
-    required this.repoName,
-    required this.onPressed,
+    required this.title,
+    this.icon,
+    this.onPressed,
   });
 
   @override
@@ -32,7 +34,7 @@ class AppListTile extends StatelessWidget {
             vertical: 18.0,
           ),
           child: Text(
-            repoName,
+            title,
             style: AppTextTheme.sora14Normal.copyWith(
               color: colors.primary,
             ),
@@ -43,7 +45,7 @@ class AppListTile extends StatelessWidget {
             right: 16.0,
           ),
           child: IconButton(
-            icon: AppIcons.favoriteButtonIcon.call(),
+            icon: icon ?? const SizedBox.shrink(),
             onPressed: onPressed,
           ),
         ),

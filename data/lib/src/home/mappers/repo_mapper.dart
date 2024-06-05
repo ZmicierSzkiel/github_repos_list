@@ -1,7 +1,7 @@
 part of home;
 
 class RepoMapper extends Repo {
-  const RepoMapper({
+  RepoMapper({
     required int id,
     required String name,
     required String url,
