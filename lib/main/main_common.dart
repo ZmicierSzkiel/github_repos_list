@@ -10,9 +10,5 @@ Future<void> mainCommon({required Flavor flavor}) async {
   await dotenv.load(fileName: ".env");
 
   initDI(flavor);
-  getIt.allReady().then(
-    (_) {
-      runApp(const App());
-    },
-  );
+  runApp(const App());
 }

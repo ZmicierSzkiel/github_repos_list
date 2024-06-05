@@ -4,6 +4,7 @@ import 'package:auto_route/auto_route.dart';
 
 import 'package:favorites/favorites.dart';
 import 'package:home/home.dart';
+import 'package:splash/splash.dart';
 
 part 'app_router.gr.dart';
 
@@ -11,9 +12,10 @@ part 'app_router.gr.dart';
   replaceInRouteName: 'Screen,Route',
   routes: <AutoRoute>[
     AutoRoute(
-      page: HomeScreen,
+      page: SplashScreen,
       initial: true,
     ),
+    AutoRoute(page: HomeScreen),
     AutoRoute(page: FavoritesScreen),
   ],
 )

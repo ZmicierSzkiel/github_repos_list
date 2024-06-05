@@ -8,7 +8,7 @@ void initDI(Flavor flavor) {
     type: AppScopeType.main,
     onInit: () => pushMainScope(flavor),
     onPushed: () {
-      getIt.get<AppRouter>().goToMainZone();
+      getIt.get<AppRouter>().setSplashScreen();
     },
   );
 
