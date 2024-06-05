@@ -25,7 +25,7 @@ class AppHeader extends StatelessWidget implements PreferredSizeWidget {
       preferredSize: Size.fromHeight(60.0),
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: colors.layer1,
           boxShadow: [
             BoxShadow(
               color: colors.shadow.withOpacity(0.1),
@@ -45,37 +45,24 @@ class AppHeader extends StatelessWidget implements PreferredSizeWidget {
           title: Text(title),
           scrolledUnderElevation: 0.0,
           leading: isAnotherScreen
-              ? Container(
-                  width: 44.0,
-                  height: 44.0,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(50.0),
-                    color: colors.accent,
-                  ),
-                  child: IconButton(
+              ? Padding(
+                padding: const EdgeInsets.only(left: 16.0),
+                child: AppHeaderButton(
                     icon: AppIcons.arrowIcon.call(),
                     onPressed: onPop,
                   ),
-                )
+              )
               : const SizedBox.shrink(),
           actions: <Widget>[
             isAnotherScreen
                 ? const SizedBox.shrink()
                 : Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                    child: Container(
-                      width: 44.0,
-                      height: 44.0,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(50.0),
-                        color: colors.accent,
-                      ),
-                      child: IconButton(
-                        onPressed: onPush,
-                        icon: AppIcons.favoriteUnselectedIcon.call(),
-                      ),
+                    padding: const EdgeInsets.only(right: 16.0),
+                    child: AppHeaderButton(
+                      icon: AppIcons.favoriteUnselectedIcon.call(),
+                      onPressed: onPush,
                     ),
-                  )
+                  ),
           ],
         ),
       ),
