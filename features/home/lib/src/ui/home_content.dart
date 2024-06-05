@@ -1,6 +1,7 @@
+import 'package:flutter/material.dart';
+
 import 'package:core/core.dart';
 import 'package:core_ui/core_ui.dart';
-import 'package:flutter/material.dart';
 
 import '../bloc/home_bloc.dart';
 
@@ -106,7 +107,7 @@ class _HomeContentState extends State<HomeContent> {
           _searchFocusNode.hasFocus,
         );
   }
-  
+
   void pushRouteAction(BuildContext context) {
     context.read<HomeBloc>().pushRouteAction();
   }
