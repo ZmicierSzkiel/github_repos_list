@@ -15,3 +15,7 @@ final class ToggleAppSearchTextFieldColor extends HomeEvent {
 
   const ToggleAppSearchTextFieldColor(this.isFocused);
 }
+
+final class PushRoute extends HomeEvent {
+  const PushRoute();
+}

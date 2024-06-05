@@ -9,3 +9,9 @@ extension ToggleWidgetStyleHelper on HomeBloc {
     add(ToggleAppSearchTextFieldColor(isFocused));
   }
 }
+
+extension PushRouteHelper on HomeBloc {
+  void pushRouteAction() {
+    add(PushRoute());
+  }
+}

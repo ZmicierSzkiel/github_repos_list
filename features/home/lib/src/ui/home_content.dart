@@ -1,7 +1,5 @@
-import 'package:app_theme/app_theme.dart';
 import 'package:core/core.dart';
 import 'package:core_ui/core_ui.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../bloc/home_bloc.dart';
@@ -28,7 +26,6 @@ class _HomeContentState extends State<HomeContent> {
   @override
   void dispose() {
     super.dispose();
-
     _searchFocusNode.removeListener(toggleAppSearchTextFieldColorAction);
     _searchEditingController.removeListener(toggleSearchHintTextAction);
 
@@ -44,13 +41,15 @@ class _HomeContentState extends State<HomeContent> {
       builder: (BuildContext context, HomeState state) {
         final bool isSearching = state.isSearching;
         final bool isFocused = state.isFocused;
+        final LoadingStatus loadingStatus = state.loadingStatus;
 
         return GestureDetector(
           onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
           child: Scaffold(
             appBar: AppHeader(
               title: 'Github repos list',
-              onPressed: () {},
+              onPush: () => pushRouteAction(context),
+              isAnotherScreen: false,
             ),
             body: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -75,27 +74,14 @@ class _HomeContentState extends State<HomeContent> {
                     padding: EdgeInsets.only(top: screenHeight),
                     child: Stack(
                       children: <Widget>[
-                        if (state.loadingStatus == LoadingStatus.loading)
-                          Center(
-                            child: CupertinoActivityIndicator(
-                              radius: 22.0,
-                            ),
-                          )
-                        else if (state.loadingStatus == LoadingStatus.preparing)
+                        if (loadingStatus == LoadingStatus.loading)
+                          AppLoadingIndicator()
+                        else if (loadingStatus == LoadingStatus.preparing)
                           const SizedBox.shrink()
                         else
-                          Center(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                AppIcons.noResultIcon.call(),
-                                const SizedBox(
-                                  height: 10.0,
-                                ),
-                                Text('You have empty history.'),
-                                Text('Click on search to start journey!'),
-                              ],
-                            ),
+                          AppPlaceholder(
+                            titleText: 'You have empty history.',
+                            bottomText: 'Click on search to start journey!',
                           ),
                       ],
                     ),
@@ -119,6 +105,10 @@ class _HomeContentState extends State<HomeContent> {
     context.read<HomeBloc>().toggleAppSearchTextFieldColorAction(
           _searchFocusNode.hasFocus,
         );
+  }
+  
+  void pushRouteAction(BuildContext context) {
+    context.read<HomeBloc>().pushRouteAction();
   }
 
   void _clearAppSearchTextField() {

@@ -1,5 +1,7 @@
-import 'package:core/core.dart';
 import 'package:flutter/material.dart';
+
+import 'package:core/core.dart';
+import 'package:core_ui/core_ui.dart';
 
 import '../bloc/favorites_bloc.dart';
 
@@ -10,7 +12,13 @@ class FavoritesContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<FavoritesBloc, FavoritesState>(
       builder: (BuildContext context, FavoritesState state) {
-        return const Placeholder();
+        return Scaffold(
+          appBar: AppHeader(
+            title: 'Favorite repos list',
+            onPop: () {},
+            isAnotherScreen: true,
+          ),
+        );
       },
     );
   }
