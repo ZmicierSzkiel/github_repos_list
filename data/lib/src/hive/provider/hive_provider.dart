@@ -41,17 +41,17 @@ class HiveProvider {
   }
 
   Future<void> deleteQueryFromPreviousQueries(String query) async {
-    final Box<List<String>> searchHistoryBox = Hive.box<List<String>>(
+    final Box<List<String>> previousQueriesBox = Hive.box<List<String>>(
       HiveKeys.previousQueries,
     );
 
-    List<String> previousQueries = List<String>.from(searchHistoryBox.get(
+    List<String> previousQueries = previousQueriesBox.get(
       HiveKeys.previousQueries,
       defaultValue: [],
-    )!);
+    )!;
 
     previousQueries.remove(query);
-    await searchHistoryBox.put(HiveKeys.previousQueries, previousQueries);
+    await previousQueriesBox.put(HiveKeys.previousQueries, previousQueries);
   }
 
   Future<void> setFavoriteRepo(Repo repo) async {
@@ -68,7 +68,7 @@ class HiveProvider {
 
   Future<void> deleteRepoFromFavorites(Repo repo) async {
     final Box<Repo> favoriteReposBox = Hive.box<Repo>(HiveKeys.favoriteRepos);
-    
+
     await favoriteReposBox.delete(repo.id);
   }
 }

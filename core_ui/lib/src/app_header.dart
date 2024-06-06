@@ -26,7 +26,7 @@ class AppHeader extends StatelessWidget implements PreferredSizeWidget {
       child: Container(
         decoration: BoxDecoration(
           color: colors.layer1,
-          boxShadow: [
+          boxShadow: <BoxShadow>[
             BoxShadow(
               color: colors.shadow.withOpacity(0.1),
               offset: Offset(0, 6),

@@ -32,7 +32,6 @@ class _HomeContentState extends State<HomeContent> {
 
   @override
   void dispose() {
-    super.dispose();
     _searchFocusNode.removeListener(toggleAppSearchTextFieldColorAction);
     _searchEditingController.removeListener(toggleSearchHintTextAction);
     _searchEditingController.removeListener(getReposByQueryAction);
@@ -40,6 +39,8 @@ class _HomeContentState extends State<HomeContent> {
     _searchEditingController.dispose();
     _searchFocusNode.dispose();
     _debounce?.cancel();
+
+    super.dispose();
   }
 
   @override

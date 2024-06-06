@@ -11,8 +11,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   final DeleteQueryFromPreviousQueriesUseCase
       _deleteQueryFromPreviousQueriesUseCase;
   final GetFavoriteReposUseCase _getFavoriteReposUseCase;
-  final GetReposByQueryUseCase _getReposByQueryUseCase;
   final GetPreviousQueriesUseCase _getPreviousQueriesUseCase;
+  final GetReposByQueryUseCase _getReposByQueryUseCase;
   final SetFavoriteRepoUseCase _setFavoriteRepoUseCase;
   final SetQueryToPreviousQueriesUseCase _setQueryToPreviousQueriesUseCase;
 
